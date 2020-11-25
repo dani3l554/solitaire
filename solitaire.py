@@ -16,6 +16,25 @@ display = pg.display.set_mode((WIDTH,HEIGHT))
 pg.display.set_caption("Solitaire")
 clock = pg.time.Clock()
 
+class Text:
+	def __init__(self, x, y, text, font, font_size, colour):
+		self.x = x
+		self.y = y
+		self.text = text
+		self.font = font
+		self.font_size = font_size
+		self.colour = colour
+
+	def gen_text_objs(self):
+		font_obj = pg.font.Font(self.font, self.font_size)
+		text_surface = font_obj.render(self.text, True, self.colour)
+		return text_surface, text_surface.get_rect()
+
+	def draw_text(self):
+		text_surface, text_rect = self.gen_text_objs()
+		text_rect.center = (self.x,self.y)
+		display.blit(text_surface,text_rect)
+
 def exit_game():
     pg.quit()
     exit(0)
